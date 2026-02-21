@@ -73,12 +73,38 @@
       font-weight: 600;
     }
 
-    header p {
+    header p.subtitle {
       font-size: 0.95rem;
       color: var(--muted);
       font-weight: 300;
       max-width: 440px;
-      margin: 0 auto;
+      margin: 0 auto 20px;
+    }
+
+    .about-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 0.72rem;
+      font-weight: 500;
+      color: var(--muted);
+      background: rgba(255,255,255,0.55);
+      border: 1px solid var(--border);
+      border-radius: 100px;
+      padding: 5px 14px;
+      cursor: pointer;
+      transition: color 0.15s, border-color 0.15s, background 0.15s;
+      letter-spacing: 0.02em;
+    }
+
+    .about-btn:hover {
+      color: var(--text);
+      border-color: #C5B8B0;
+      background: rgba(255,255,255,0.85);
+    }
+
+    .about-btn svg {
+      opacity: 0.6;
     }
 
     /* ── Filter bar ──────────────────────────── */
@@ -147,6 +173,42 @@
     .pill.active {
       color: #fff;
       font-weight: 600;
+    }
+
+    /* ── Phase description strip ─────────────── */
+    .phase-desc {
+      overflow: hidden;
+      max-height: 0;
+      opacity: 0;
+      transition: max-height 0.3s ease, opacity 0.25s ease, padding 0.3s ease;
+      border-bottom: 1px solid transparent;
+    }
+
+    .phase-desc.visible {
+      max-height: 120px;
+      opacity: 1;
+      border-bottom-color: var(--border);
+    }
+
+    .phase-desc-inner {
+      max-width: 680px;
+      margin: 0 auto;
+      padding: 12px 24px;
+      text-align: center;
+    }
+
+    .phase-desc-energy {
+      font-size: 0.63rem;
+      font-weight: 600;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      margin-bottom: 3px;
+    }
+
+    .phase-desc-focus {
+      font-size: 0.8rem;
+      color: var(--muted);
+      line-height: 1.5;
     }
 
     /* ── Main ────────────────────────────────── */
@@ -311,6 +373,238 @@
       color: var(--muted);
     }
 
+    /* ── Modal overlay ───────────────────────── */
+    .modal-overlay {
+      position: fixed;
+      inset: 0;
+      background: rgba(45, 37, 32, 0.4);
+      backdrop-filter: blur(5px);
+      -webkit-backdrop-filter: blur(5px);
+      z-index: 300;
+      display: flex;
+      align-items: flex-start;
+      justify-content: center;
+      padding: 40px 16px 40px;
+      overflow-y: auto;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.22s ease;
+    }
+
+    .modal-overlay.open {
+      opacity: 1;
+      pointer-events: auto;
+    }
+
+    .modal {
+      background: var(--surface);
+      border-radius: 20px;
+      max-width: 600px;
+      width: 100%;
+      padding: 40px 40px 44px;
+      position: relative;
+      transform: translateY(20px);
+      transition: transform 0.28s ease;
+      box-shadow: 0 12px 60px rgba(45,37,32,0.18);
+    }
+
+    .modal-overlay.open .modal {
+      transform: translateY(0);
+    }
+
+    .modal-close {
+      position: absolute;
+      top: 14px;
+      right: 14px;
+      width: 34px;
+      height: 34px;
+      border-radius: 50%;
+      border: 1px solid var(--border);
+      background: var(--bg);
+      color: var(--muted);
+      font-size: 1.05rem;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: background 0.15s, color 0.15s;
+      line-height: 1;
+    }
+
+    .modal-close:hover {
+      background: var(--border);
+      color: var(--text);
+    }
+
+    .modal-header {
+      margin-bottom: 28px;
+    }
+
+    .modal-eyebrow {
+      font-size: 0.63rem;
+      font-weight: 600;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--muted);
+      margin-bottom: 6px;
+    }
+
+    .modal-title {
+      font-size: 1.5rem;
+      font-weight: 300;
+      letter-spacing: -0.02em;
+      color: var(--text);
+    }
+
+    .modal-title strong { font-weight: 600; }
+
+    .modal-divider {
+      border: none;
+      border-top: 1px solid var(--border);
+      margin: 26px 0;
+    }
+
+    .modal-section-label {
+      font-size: 0.63rem;
+      font-weight: 600;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--muted);
+      margin-bottom: 12px;
+    }
+
+    /* Philosophy block */
+    .philosophy-block {
+      background: linear-gradient(135deg, #F7ECE8 0%, #EDE8F2 100%);
+      border-radius: 14px;
+      padding: 20px 22px;
+      border-left: 3px solid #C8728E;
+    }
+
+    .philosophy-block p {
+      font-size: 0.87rem;
+      line-height: 1.75;
+      color: var(--text);
+    }
+
+    .philosophy-block p + p {
+      margin-top: 10px;
+    }
+
+    .philosophy-block strong {
+      font-weight: 600;
+    }
+
+    /* Quality pillars */
+    .pillars {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    .pillar {
+      display: flex;
+      align-items: flex-start;
+      gap: 12px;
+    }
+
+    .pillar-num {
+      flex-shrink: 0;
+      width: 24px;
+      height: 24px;
+      border-radius: 50%;
+      background: #F0EBF7;
+      color: #7868B4;
+      font-size: 0.68rem;
+      font-weight: 700;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-top: 1px;
+    }
+
+    .pillar-text strong {
+      display: block;
+      font-size: 0.83rem;
+      font-weight: 600;
+      color: var(--text);
+      margin-bottom: 1px;
+    }
+
+    .pillar-text span {
+      font-size: 0.76rem;
+      color: var(--muted);
+      line-height: 1.5;
+    }
+
+    /* Phase guide */
+    .phase-guide {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    .phase-guide-row {
+      display: flex;
+      align-items: flex-start;
+      gap: 12px;
+      padding: 10px 14px;
+      border-radius: 10px;
+      border: 1px solid var(--border);
+      background: var(--bg);
+    }
+
+    .phase-guide-dot {
+      flex-shrink: 0;
+      width: 9px;
+      height: 9px;
+      border-radius: 50%;
+      margin-top: 5px;
+    }
+
+    .phase-guide-name {
+      font-size: 0.8rem;
+      font-weight: 600;
+      color: var(--text);
+      margin-bottom: 1px;
+    }
+
+    .phase-guide-detail {
+      font-size: 0.74rem;
+      color: var(--muted);
+      line-height: 1.5;
+    }
+
+    /* Channel list */
+    .channel-list {
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }
+
+    .channel-row {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-size: 0.82rem;
+    }
+
+    .channel-dot {
+      flex-shrink: 0;
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+    }
+
+    .channel-dot.good     { background: #3E9A76; }
+    .channel-dot.ok       { background: #C4845A; }
+
+    .channel-note {
+      font-size: 0.74rem;
+      color: var(--muted);
+      margin-left: 2px;
+    }
+
     /* ── Responsive ──────────────────────────── */
     @media (max-width: 680px) {
       header { padding: 40px 18px 34px; }
@@ -325,6 +619,8 @@
 
       main { padding: 24px 16px 52px; }
       .grid { gap: 16px; }
+
+      .modal { padding: 30px 22px 34px; }
     }
   </style>
 </head>
@@ -333,7 +629,15 @@
   <header>
     <p class="eyebrow">Curated Practice Library</p>
     <h1>Yoga <strong>by Cycle Phase</strong></h1>
-    <p>Find the right practice for wherever you are in your cycle</p>
+    <p class="subtitle">Find the right practice for wherever you are in your cycle</p>
+    <button class="about-btn" id="about-btn">
+      <svg width="13" height="13" viewBox="0 0 13 13" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <circle cx="6.5" cy="6.5" r="5.75" stroke="currentColor" stroke-width="1.2"/>
+        <rect x="6" y="5.5" width="1" height="4" rx="0.5" fill="currentColor"/>
+        <rect x="6" y="3.5" width="1" height="1" rx="0.5" fill="currentColor"/>
+      </svg>
+      About this library
+    </button>
   </header>
 
   <div class="filter-bar">
@@ -349,10 +653,95 @@
     </div>
   </div>
 
+  <div class="phase-desc" id="phase-desc">
+    <div class="phase-desc-inner">
+      <div class="phase-desc-energy" id="phase-desc-energy"></div>
+      <div class="phase-desc-focus" id="phase-desc-focus"></div>
+    </div>
+  </div>
+
   <main>
     <p class="results-count" id="count"></p>
     <div class="grid" id="grid"></div>
   </main>
+
+  <!-- About modal -->
+  <div class="modal-overlay" id="modal-overlay" role="dialog" aria-modal="true" aria-label="About this library">
+    <div class="modal">
+      <button class="modal-close" id="modal-close" aria-label="Close">&#x2715;</button>
+
+      <div class="modal-header">
+        <p class="modal-eyebrow">Curation philosophy</p>
+        <h2 class="modal-title">About <strong>this library</strong></h2>
+      </div>
+
+      <p class="modal-section-label">The rule</p>
+      <div class="philosophy-block">
+        <p>A practice belongs here if it leaves you feeling <strong>strong, regulated, clear, grounded, creative, or gently restored.</strong></p>
+        <p>It doesn't belong if it leaves you feeling compared, behind, not enough, rushed, or performative.</p>
+      </div>
+
+      <hr class="modal-divider" />
+
+      <p class="modal-section-label">What makes a good practice</p>
+      <div class="pillars">
+        <div class="pillar">
+          <div class="pillar-num">1</div>
+          <div class="pillar-text">
+            <strong>Clear alignment cues</strong>
+            <span>Joints, pelvis, spine position — with transitions guided, not rushed.</span>
+          </div>
+        </div>
+        <div class="pillar">
+          <div class="pillar-num">2</div>
+          <div class="pillar-text">
+            <strong>Modifications offered</strong>
+            <span>Easier and stronger options, props acknowledged, rest is never shamed.</span>
+          </div>
+        </div>
+        <div class="pillar">
+          <div class="pillar-num">3</div>
+          <div class="pillar-text">
+            <strong>Breath is central</strong>
+            <span>Inhale/exhale cued throughout, not just mentioned at the start. Pace serves the breath.</span>
+          </div>
+        </div>
+        <div class="pillar">
+          <div class="pillar-num">4</div>
+          <div class="pillar-text">
+            <strong>Mindfulness woven in</strong>
+            <span>Grounding, presence, self-trust — lightly, without preaching.</span>
+          </div>
+        </div>
+        <div class="pillar">
+          <div class="pillar-num">5</div>
+          <div class="pillar-text">
+            <strong>Teacher energy over production value</strong>
+            <span>Practice over performance. No "yoga model" aesthetic-first energy.</span>
+          </div>
+        </div>
+      </div>
+
+      <hr class="modal-divider" />
+
+      <p class="modal-section-label">Phase guide</p>
+      <div class="phase-guide" id="modal-phase-guide"></div>
+
+      <hr class="modal-divider" />
+
+      <p class="modal-section-label">Channels in this library</p>
+      <div class="channel-list">
+        <div class="channel-row"><div class="channel-dot good"></div> Yoga With Adriene <span class="channel-note">(last 5–6 years)</span></div>
+        <div class="channel-row"><div class="channel-dot good"></div> Yoga With Tim</div>
+        <div class="channel-row"><div class="channel-dot good"></div> Yoga with Kassandra</div>
+        <div class="channel-row"><div class="channel-dot good"></div> Five Parks Yoga</div>
+        <div class="channel-row"><div class="channel-dot good"></div> Charlie Follows</div>
+        <div class="channel-row"><div class="channel-dot good"></div> MalovaElena <span class="channel-note">(ES)</span></div>
+        <div class="channel-row"><div class="channel-dot ok"></div> SarahBethYoga <span class="channel-note">— use selectively</span></div>
+      </div>
+
+    </div>
+  </div>
 
   <script type="module">
     import { videos } from './videos.js';
@@ -371,7 +760,6 @@
 
     const LANGS = ['All', 'EN', 'ES'];
 
-    // Colour for the 4px phase accent bar + active pill background
     const PHASE_COLOR = {
       'Menstrual (bleeding)':          '#C8728E',
       'Early follicular (post-bleed)': '#C4845A',
@@ -383,6 +771,37 @@
     };
 
     const LANG_COLOR = { EN: '#3E7298', ES: '#6E3E98' };
+
+    const PHASE_DESC = {
+      'Menstrual (bleeding)': {
+        energy: 'Low · Inward · Restorative',
+        focus:  'Yin and restorative practices. Hip and low back release. Nervous system downshift. Mostly seated or supine.',
+      },
+      'Early follicular (post-bleed)': {
+        energy: 'Rebuilding · Gentle · Emerging',
+        focus:  'Gentle mobility as energy slowly returns. Slow, short flows — 15 to 20 min. No high-intensity vinyasa.',
+      },
+      'Mid follicular (rising)': {
+        energy: 'Expansive · Balanced · Rising',
+        focus:  'Chest and shoulder openers. Moderate vinyasa. Balanced strength work.',
+      },
+      'Ovulation (peak)': {
+        energy: 'Peak energy · Playful · Strong',
+        focus:  'Strong flows, power yoga, and playful balance work. High energy, 10 to 20 min.',
+      },
+      'Early luteal (post-ovulation)': {
+        energy: 'Steady · Grounded · Sustained',
+        focus:  'Controlled strength, longer holds, breath-guided grounding. Steady pace.',
+      },
+      'Mid luteal (settling)': {
+        energy: 'Settling · Releasing · Inward',
+        focus:  'Hips and lower back. Gentle detox flows. Emotional regulation themes.',
+      },
+      'Late luteal (premenstrual)': {
+        energy: 'Reflective · Slow · Inward',
+        focus:  'Yin, breathwork, slow transitions. Warm and non-competitive tone. Creative and reflective themes.',
+      },
+    };
 
     // ── State ─────────────────────────────────────────────────────────
     let activePhase = 'All';
@@ -405,6 +824,24 @@
         .replace(/"/g, '&quot;');
     }
 
+    // ── Phase description strip ───────────────────────────────────────
+    function renderPhaseDesc() {
+      const strip = document.getElementById('phase-desc');
+      const desc  = PHASE_DESC[activePhase];
+
+      if (!desc) {
+        strip.classList.remove('visible');
+        return;
+      }
+
+      const color = PHASE_COLOR[activePhase] ?? '#8A7E7A';
+      document.getElementById('phase-desc-energy').textContent = desc.energy;
+      document.getElementById('phase-desc-energy').style.color  = color;
+      document.getElementById('phase-desc-focus').textContent  = desc.focus;
+      strip.style.background = `${color}12`;
+      strip.classList.add('visible');
+    }
+
     // ── Render filters ────────────────────────────────────────────────
     function renderFilters() {
       renderPillGroup('phase-pills', PHASES, 'phase', activePhase, (p) => {
@@ -418,6 +855,8 @@
         const color = LANG_COLOR[l] ?? '#3D3530';
         return { label, color };
       });
+
+      renderPhaseDesc();
     }
 
     function renderPillGroup(containerId, items, dataKey, activeValue, getProps) {
@@ -496,9 +935,52 @@
       }).join('');
     }
 
+    // ── Modal phase guide ─────────────────────────────────────────────
+    function renderModalPhaseGuide() {
+      const guide = document.getElementById('modal-phase-guide');
+      guide.innerHTML = Object.entries(PHASE_DESC).map(([phase, { energy, focus }]) => {
+        const color = PHASE_COLOR[phase] ?? '#8A7E7A';
+        return `
+          <div class="phase-guide-row">
+            <div class="phase-guide-dot" style="background:${color}"></div>
+            <div>
+              <div class="phase-guide-name">${esc(phase)}</div>
+              <div class="phase-guide-detail">${esc(focus)}</div>
+            </div>
+          </div>`;
+      }).join('');
+    }
+
+    // ── Modal open / close ────────────────────────────────────────────
+    const overlay   = document.getElementById('modal-overlay');
+    const aboutBtn  = document.getElementById('about-btn');
+    const closeBtn  = document.getElementById('modal-close');
+
+    function openModal() {
+      overlay.classList.add('open');
+      document.body.style.overflow = 'hidden';
+    }
+
+    function closeModal() {
+      overlay.classList.remove('open');
+      document.body.style.overflow = '';
+    }
+
+    aboutBtn.addEventListener('click', openModal);
+    closeBtn.addEventListener('click', closeModal);
+
+    overlay.addEventListener('click', (e) => {
+      if (e.target === overlay) closeModal();
+    });
+
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape') closeModal();
+    });
+
     // ── Init ──────────────────────────────────────────────────────────
     renderFilters();
     renderCards();
+    renderModalPhaseGuide();
   </script>
 
 </body>
