@@ -11,7 +11,7 @@ export const videos = [
     "breathFocus": "High",
     "modifications": "Yes (props-friendly)",
     "notes": "Restorative pacing; great when you want minimal effort and maximum downshift.",
-    "url": "https://youtu.be/kYK_g8BAapQ"
+    "url": "https://www.youtube.com/watch?v=nylNjxeOeSw"
   },
   {
     "phase": "Menstrual (bleeding)",
@@ -95,7 +95,7 @@ export const videos = [
     "breathFocus": "High",
     "modifications": "Yes",
     "notes": "Breath-led, down-regulating practice with plenty of room to soften.",
-    "url": "https://www.youtube.com/watch?v=nylNjxeOeSw"
+    "url": "https://www.youtube.com/watch?v=tD_l3fDTFyg"
   },
   {
     "phase": "Early follicular (post-bleed)",
