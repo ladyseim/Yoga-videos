@@ -1,0 +1,501 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Yoga by Cycle Phase</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    :root {
+      --bg:           #FAF8F5;
+      --surface:      #FFFFFF;
+      --border:       #EDE8E3;
+      --text:         #2D2520;
+      --muted:        #8A7E7A;
+      --shadow:       0 1px 6px rgba(45,37,32,.05), 0 4px 16px rgba(45,37,32,.06);
+      --shadow-hover: 0 4px 20px rgba(45,37,32,.10), 0 8px 32px rgba(45,37,32,.08);
+      --radius:       16px;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'Inter', system-ui, -apple-system, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.6;
+      min-height: 100vh;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* ── Header ─────────────────────────────── */
+    header {
+      padding: 56px 24px 48px;
+      text-align: center;
+      background: linear-gradient(155deg, #F7ECE8 0%, #EDE8F2 45%, #E8F2EC 100%);
+      border-bottom: 1px solid var(--border);
+    }
+
+    .eyebrow {
+      font-size: 0.68rem;
+      font-weight: 600;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--muted);
+      margin-bottom: 14px;
+    }
+
+    header h1 {
+      font-size: clamp(1.9rem, 5vw, 2.8rem);
+      font-weight: 300;
+      letter-spacing: -0.03em;
+      color: var(--text);
+      margin-bottom: 12px;
+    }
+
+    header h1 strong {
+      font-weight: 600;
+    }
+
+    header p {
+      font-size: 0.95rem;
+      color: var(--muted);
+      font-weight: 300;
+      max-width: 440px;
+      margin: 0 auto;
+    }
+
+    /* ── Filter bar ──────────────────────────── */
+    .filter-bar {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      background: rgba(250, 248, 245, 0.93);
+      backdrop-filter: blur(18px);
+      -webkit-backdrop-filter: blur(18px);
+      border-bottom: 1px solid var(--border);
+      padding: 14px 24px;
+    }
+
+    .filter-inner {
+      max-width: 1200px;
+      margin: 0 auto;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    .filter-row {
+      display: flex;
+      align-items: flex-start;
+      gap: 12px;
+    }
+
+    .filter-label {
+      font-size: 0.63rem;
+      font-weight: 600;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--muted);
+      white-space: nowrap;
+      padding-top: 7px;
+      min-width: 58px;
+    }
+
+    .pills {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+    }
+
+    .pill {
+      display: inline-flex;
+      align-items: center;
+      height: 30px;
+      padding: 0 14px;
+      border-radius: 100px;
+      font-size: 0.77rem;
+      font-weight: 500;
+      cursor: pointer;
+      border: 1.5px solid var(--border);
+      background: var(--surface);
+      color: var(--muted);
+      transition: border-color 0.15s, color 0.15s, background 0.15s, box-shadow 0.15s;
+      white-space: nowrap;
+      user-select: none;
+      line-height: 1;
+    }
+
+    .pill:hover:not(.active) {
+      border-color: #C5B8B0;
+      color: var(--text);
+      background: #F4EFE9;
+    }
+
+    .pill.active {
+      color: #fff;
+      font-weight: 600;
+    }
+
+    /* ── Main ────────────────────────────────── */
+    main {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 32px 24px 72px;
+    }
+
+    .results-count {
+      font-size: 0.78rem;
+      color: var(--muted);
+      margin-bottom: 22px;
+    }
+
+    /* ── Grid ────────────────────────────────── */
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+      gap: 24px;
+    }
+
+    /* ── Card ────────────────────────────────── */
+    .card {
+      background: var(--surface);
+      border-radius: var(--radius);
+      overflow: hidden;
+      box-shadow: var(--shadow);
+      border: 1px solid var(--border);
+      display: flex;
+      flex-direction: column;
+      transition: box-shadow 0.2s ease, transform 0.22s ease;
+    }
+
+    .card:hover {
+      box-shadow: var(--shadow-hover);
+      transform: translateY(-3px);
+    }
+
+    .phase-bar {
+      height: 4px;
+      flex-shrink: 0;
+    }
+
+    .embed-wrap {
+      position: relative;
+      padding-bottom: 56.25%;
+      background: #EEE8E2;
+      flex-shrink: 0;
+    }
+
+    .embed-wrap iframe {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      border: none;
+      display: block;
+    }
+
+    .no-embed {
+      position: absolute;
+      inset: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.8rem;
+      color: var(--muted);
+    }
+
+    .card-body {
+      padding: 18px 20px 22px;
+      display: flex;
+      flex-direction: column;
+      flex: 1;
+      gap: 0;
+    }
+
+    .card-top {
+      display: flex;
+      align-items: flex-start;
+      gap: 10px;
+      margin-bottom: 8px;
+    }
+
+    .card-title {
+      flex: 1;
+      font-size: 0.9rem;
+      font-weight: 600;
+      line-height: 1.4;
+      color: var(--text);
+    }
+
+    .lang-badge {
+      flex-shrink: 0;
+      font-size: 0.61rem;
+      font-weight: 700;
+      letter-spacing: 0.06em;
+      padding: 3px 8px;
+      border-radius: 100px;
+      margin-top: 2px;
+    }
+
+    .lang-badge.EN {
+      background: #D6EAF4;
+      color: #29567A;
+    }
+
+    .lang-badge.ES {
+      background: #E8D6F4;
+      color: #50297A;
+    }
+
+    .card-meta {
+      font-size: 0.75rem;
+      color: var(--muted);
+      display: flex;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 5px;
+      margin-bottom: 10px;
+    }
+
+    .card-meta .sep { opacity: 0.4; }
+
+    .style-tag {
+      display: inline-block;
+      width: fit-content;
+      font-size: 0.69rem;
+      padding: 2px 9px;
+      background: var(--bg);
+      border: 1px solid var(--border);
+      border-radius: 5px;
+      color: var(--muted);
+      margin-bottom: 12px;
+    }
+
+    .card-notes {
+      font-size: 0.79rem;
+      color: var(--muted);
+      line-height: 1.6;
+      font-style: italic;
+      margin-top: auto;
+    }
+
+    /* ── Empty state ─────────────────────────── */
+    .empty {
+      grid-column: 1 / -1;
+      text-align: center;
+      padding: 80px 24px;
+    }
+
+    .empty h2 {
+      font-size: 1.05rem;
+      font-weight: 500;
+      color: var(--text);
+      margin-bottom: 6px;
+    }
+
+    .empty p {
+      font-size: 0.85rem;
+      color: var(--muted);
+    }
+
+    /* ── Responsive ──────────────────────────── */
+    @media (max-width: 680px) {
+      header { padding: 40px 18px 34px; }
+      .filter-bar { padding: 12px 16px; }
+
+      .filter-row {
+        flex-direction: column;
+        gap: 6px;
+      }
+
+      .filter-label { padding-top: 0; }
+
+      main { padding: 24px 16px 52px; }
+      .grid { gap: 16px; }
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <p class="eyebrow">Curated Practice Library</p>
+    <h1>Yoga <strong>by Cycle Phase</strong></h1>
+    <p>Find the right practice for wherever you are in your cycle</p>
+  </header>
+
+  <div class="filter-bar">
+    <div class="filter-inner">
+      <div class="filter-row">
+        <span class="filter-label">Phase</span>
+        <div class="pills" id="phase-pills"></div>
+      </div>
+      <div class="filter-row">
+        <span class="filter-label">Language</span>
+        <div class="pills" id="lang-pills"></div>
+      </div>
+    </div>
+  </div>
+
+  <main>
+    <p class="results-count" id="count"></p>
+    <div class="grid" id="grid"></div>
+  </main>
+
+  <script type="module">
+    import { videos } from './videos.js';
+
+    // ── Data ──────────────────────────────────────────────────────────
+    const PHASES = [
+      'All',
+      'Menstrual (bleeding)',
+      'Early follicular (post-bleed)',
+      'Mid follicular (rising)',
+      'Ovulation (peak)',
+      'Early luteal (post-ovulation)',
+      'Mid luteal (settling)',
+      'Late luteal (premenstrual)',
+    ];
+
+    const LANGS = ['All', 'EN', 'ES'];
+
+    // Colour for the 4px phase accent bar + active pill background
+    const PHASE_COLOR = {
+      'Menstrual (bleeding)':          '#C8728E',
+      'Early follicular (post-bleed)': '#C4845A',
+      'Mid follicular (rising)':       '#76A048',
+      'Ovulation (peak)':              '#3E9A76',
+      'Early luteal (post-ovulation)': '#68A248',
+      'Mid luteal (settling)':         '#7868B4',
+      'Late luteal (premenstrual)':    '#A0608A',
+    };
+
+    const LANG_COLOR = { EN: '#3E7298', ES: '#6E3E98' };
+
+    // ── State ─────────────────────────────────────────────────────────
+    let activePhase = 'All';
+    let activeLang  = 'All';
+
+    // ── Helpers ───────────────────────────────────────────────────────
+    function ytId(url) {
+      const a = url.match(/youtu\.be\/([^?&#/]+)/);
+      if (a) return a[1];
+      const b = url.match(/[?&]v=([^&#]+)/);
+      if (b) return b[1];
+      return null;
+    }
+
+    function esc(s) {
+      return String(s)
+        .replace(/&/g, '&amp;')
+        .replace(/</g, '&lt;')
+        .replace(/>/g, '&gt;')
+        .replace(/"/g, '&quot;');
+    }
+
+    // ── Render filters ────────────────────────────────────────────────
+    function renderFilters() {
+      renderPillGroup('phase-pills', PHASES, 'phase', activePhase, (p) => {
+        const label = p === 'All' ? 'All phases' : p;
+        const color = PHASE_COLOR[p] ?? '#3D3530';
+        return { label, color };
+      });
+
+      renderPillGroup('lang-pills', LANGS, 'lang', activeLang, (l) => {
+        const label = l === 'All' ? 'All languages' : l === 'EN' ? 'EN – English' : 'ES – Español';
+        const color = LANG_COLOR[l] ?? '#3D3530';
+        return { label, color };
+      });
+    }
+
+    function renderPillGroup(containerId, items, dataKey, activeValue, getProps) {
+      const el = document.getElementById(containerId);
+      el.innerHTML = items.map(item => {
+        const isActive = item === activeValue;
+        const { label, color } = getProps(item);
+        const style = isActive ? `style="background:${color};border-color:${color};"` : '';
+        return `<button class="pill${isActive ? ' active' : ''}" data-${dataKey}="${esc(item)}" ${style}>${esc(label)}</button>`;
+      }).join('');
+
+      el.querySelectorAll('.pill').forEach(btn => {
+        btn.addEventListener('click', () => {
+          if (dataKey === 'phase') activePhase = btn.dataset.phase;
+          else                     activeLang  = btn.dataset.lang;
+          renderFilters();
+          renderCards();
+        });
+      });
+    }
+
+    // ── Render cards ──────────────────────────────────────────────────
+    function renderCards() {
+      const filtered = videos.filter(v => {
+        const phaseOk = activePhase === 'All' || v.phase === activePhase;
+        const langOk  = activeLang  === 'All' || v.language === activeLang;
+        return phaseOk && langOk;
+      });
+
+      document.getElementById('count').textContent =
+        `${filtered.length} video${filtered.length !== 1 ? 's' : ''}`;
+
+      const grid = document.getElementById('grid');
+
+      if (!filtered.length) {
+        grid.innerHTML = `
+          <div class="empty">
+            <h2>No videos match these filters</h2>
+            <p>Try a different phase or language selection.</p>
+          </div>`;
+        return;
+      }
+
+      grid.innerHTML = filtered.map(v => {
+        const id       = ytId(v.url);
+        const barColor = PHASE_COLOR[v.phase] ?? '#B8B0A8';
+
+        const embedHtml = id
+          ? `<iframe
+               src="https://www.youtube.com/embed/${esc(id)}"
+               title="${esc(v.title)}"
+               allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+               allowfullscreen
+               loading="lazy"
+             ></iframe>`
+          : `<div class="no-embed">Video unavailable</div>`;
+
+        return `
+          <div class="card">
+            <div class="phase-bar" style="background:${barColor}"></div>
+            <div class="embed-wrap">${embedHtml}</div>
+            <div class="card-body">
+              <div class="card-top">
+                <h2 class="card-title">${esc(v.title)}</h2>
+                <span class="lang-badge ${esc(v.language)}">${esc(v.language)}</span>
+              </div>
+              <div class="card-meta">
+                <span>${esc(v.channel)}</span>
+                <span class="sep">·</span>
+                <span>${esc(v.length)}</span>
+              </div>
+              <span class="style-tag">${esc(v.style)}</span>
+              <p class="card-notes">${esc(v.notes)}</p>
+            </div>
+          </div>`;
+      }).join('');
+    }
+
+    // ── Init ──────────────────────────────────────────────────────────
+    renderFilters();
+    renderCards();
+  </script>
+
+</body>
+</html>
