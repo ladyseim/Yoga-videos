@@ -133,7 +133,7 @@ You want:
 
 # 🌿 Phase-Based Selection Criteria
 
-When adding new videos, match them to phase energy.
+When adding new videos, match them to phase energy. Phase guidance is based on *WomanCode* by Alisa Vitti.
 
 ---
 
@@ -211,7 +211,7 @@ Look for:
 - Self-care and nesting themes
 
 Avoid:
-- Jarring, high-resistance movement (the book names vinyasa)
+- Jarring, high-resistance movement (*WomanCode* names vinyasa)
 
 ---
 
