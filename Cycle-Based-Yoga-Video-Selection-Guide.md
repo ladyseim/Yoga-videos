@@ -133,87 +133,85 @@ You want:
 
 # 🌿 Phase-Based Selection Criteria
 
-When adding new videos, match them to phase energy.
+When adding new videos, match them to phase energy. Phase guidance is based on *WomanCode* by Alisa Vitti.
 
 ---
 
 ## 🩸 Menstrual (Bleeding)
-Look for:
-- Restorative
-- Yin
-- Hip + low back release
-- Nervous system downshift
-- Seated or supine majority
+Rest or gentle yoga, especially days 1–2; stretching and walking.
 
-Avoid:
-- Core-heavy
-- Inversions
-- Fast sun salutations
+Look for:
+- Rest and gentle practices
+- Cramps, low back and fatigue videos
+- Reflective, self-assessing themes
 
 ---
 
 ## 🌱 Early Follicular
-Look for:
-- Gentle mobility
-- Slow flow
-- Rebuilding energy
-- 15–20 min
+Start building activity back up as bleeding ends.
 
-Avoid:
-- HIIT-style vinyasa
+Look for:
+- Gentle to moderate flows
+- Morning wake-ups
+- Mobility
+- Beginner foundations
+- Fresh-start themes
 
 ---
 
 ## 🌼 Mid Follicular
+Energy climbing and new things stick best.
+
 Look for:
-- Expansion
-- Openers
-- Moderate vinyasa
-- Balanced strength
+- Creative, exploratory, playful flows
+- Learning new shapes (e.g. crow, half moon)
 
 ---
 
 ## 🌕 Ovulation
-Look for:
-- Strong flows
-- Power yoga
-- Playful balance work
-- 10–20 min high energy
+Peak, strenuous.
 
-Avoid:
-- Overly restorative
+Look for:
+- Power
+- Heat
+- Intense core
+
+Tie-breaker:
+- Connection and communication themes (heart, voice, celebration)
 
 ---
 
 ## 🌾 Early Luteal
+Energy may still be high, so keep the strength going.
+
 Look for:
 - Steady strength
-- Controlled pace
-- Longer holds
-- Breath-guided grounding
+- Core
+- Conditioning
 
 ---
 
 ## 🌙 Mid Luteal
+Energy starts to soften and turn inward.
+
 Look for:
-- Hips
-- Lower back
-- Gentle detox flows
-- Emotional regulation themes
+- Grounding
+- Balance
+- Focus
+- Detail-oriented alignment work
 
 ---
 
-## 🌑 Late Luteal (Creative + Inward)
+## 🌑 Late Luteal (Final ~5 Days)
+Scale back to lower-resistance, less jarring movement.
+
 Look for:
-- Yin
-- Slow transitions
-- Breathwork
-- Reflective tone
-- Creative metaphors
+- PMS support: bloating and digestion
+- Mood and anxiety
+- Self-care and nesting themes
 
 Avoid:
-- Intense heat
-- Competitive vibe
+- Jarring, high-resistance movement (*WomanCode* names vinyasa)
 
 ---
 
