@@ -109,6 +109,12 @@ You want:
 - Structured flows
 - Good Spanish learning option
 
+**The Yogi Witch**
+- Largest channel in the library
+- Covers the whole cycle: slow yin and gentle stretches through to fiery power flows
+- Playful mandala, crow and balance flows suit mid follicular
+- Moon and seasonal themes, lightly mystical
+
 ---
 
 ## ⚠️ Use Selectively
